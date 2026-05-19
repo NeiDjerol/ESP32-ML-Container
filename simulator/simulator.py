@@ -2,8 +2,14 @@ import requests
 import random
 import time
 from datetime import datetime
+import json
 
-API_URL = "http://host.docker.internal:8000/sensor"
+with open("config.json", "r") as f:
+    config = json.load(f)
+
+API_URL = config["simulator"]["api_url"]
+
+SEND_INTERVAL = config["simulator"]["send_interval_seconds"]
 
 print("ESP32 motion simulator started")
 
@@ -40,4 +46,4 @@ while True:
 
         print("Error:", e)
 
-    time.sleep(5)
+    time.sleep(SEND_INTERVAL)

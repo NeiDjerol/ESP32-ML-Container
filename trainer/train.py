@@ -4,11 +4,18 @@ from sklearn.model_selection import train_test_split
 import joblib
 import os
 import time
+import json
+
+with open("config.json", "r") as f:
+    config = json.load(f)
+
+DATASET_PATH = config["dataset"]["path"]
+
+MODEL_PATH = config["model"]["path"]
+
+MIN_ROWS = config["model"]["min_rows_for_training"]
 
 print("TRAINER CONTAINER STARTED")
-
-DATASET_PATH = "dataset/motion_data.csv"
-MODEL_PATH = "model/traffic_model.pkl"
 
 print("ML trainer started")
 
@@ -29,7 +36,7 @@ while True:
 
         df = pd.read_csv(DATASET_PATH)
 
-        if len(df) < 10:
+        if len(df) < MIN_ROWS:
             print(f"Not enough data: {len(df)} rows")
             time.sleep(10)
             continue

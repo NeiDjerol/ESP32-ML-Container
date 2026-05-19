@@ -1,0 +1,27 @@
+{
+  "api": {
+    "host": "0.0.0.0",
+    "port": 8000
+  },
+
+  "dataset": {
+    "path": "dataset/motion_data.csv"
+  },
+
+  "model": {
+    "path": "model/traffic_model.pkl",
+    "min_rows_for_training": 10
+  },
+
+  "simulator": {
+    "api_url": "http://api:8000/sensor",
+    "send_interval_seconds": 5
+  },
+
+  "esp32": {
+    "wifi_name": "YOUR_WIFI_NAME",
+    "wifi_password": "YOUR_WIFI_PASSWORD",
+    "server_url": "http://192.168.0.15:8000/sensor",
+    "pir_pin": 13
+  }
+}

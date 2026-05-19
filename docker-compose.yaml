@@ -9,10 +9,14 @@ services:
 
     volumes:
       - ./dataset:/app/dataset
+      - ./config.json:/app/config.json
 
   simulator:
     build: ./simulator
     container_name: motion_simulator
+
+    volumes:
+      - ./config.json:/app/config.json
 
     depends_on:
       - api
@@ -24,6 +28,7 @@ services:
     volumes:
       - ./dataset:/app/dataset
       - ./model:/app/model
+      - ./config.json:/app/config.json
 
     depends_on:
       - api

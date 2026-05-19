@@ -2,11 +2,14 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import pandas as pd
 import os
+import json
+
+with open("config.json", "r") as f:
+    config = json.load(f)
+
+DATASET_PATH = config["dataset"]["path"]
 
 app = FastAPI()
-
-DATASET_PATH = "dataset/motion_data.csv"
-
 
 class MotionData(BaseModel):
     motion: int
