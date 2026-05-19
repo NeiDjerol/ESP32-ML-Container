@@ -5,7 +5,7 @@ import os
 
 app = FastAPI()
 
-DATASET_PATH = "../dataset/motion_data.csv"
+DATASET_PATH = "dataset/motion_data.csv"
 
 
 class MotionData(BaseModel):
