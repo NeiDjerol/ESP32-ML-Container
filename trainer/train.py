@@ -12,39 +12,51 @@ print("ML trainer started")
 
 while True:
 
-    if not os.path.exists(DATASET_PATH):
-        print("Dataset not found")
-        time.sleep(10)
-        continue
+    try:
 
-    df = pd.read_csv(DATASET_PATH)
+        if not os.path.exists(DATASET_PATH):
+            print("Dataset not found")
+            time.sleep(10)
+            continue
 
-    if len(df) < 10:
-        print(f"Not enough data: {len(df)} rows")
-        time.sleep(10)
-        continue
+        if os.path.getsize(DATASET_PATH) == 0:
+            print("Dataset is empty")
+            time.sleep(10)
+            continue
 
-    df["hour"] = pd.to_datetime(df["timestamp"]).dt.hour
+        df = pd.read_csv(DATASET_PATH)
 
-    X = df[["hour"]]
+        if len(df) < 10:
+            print(f"Not enough data: {len(df)} rows")
+            time.sleep(10)
+            continue
 
-    y = df["motion"]
+        df["hour"] = pd.to_datetime(df["timestamp"]).dt.hour
 
-    X_train, X_test, y_train, y_test = train_test_split(
-        X,
-        y,
-        test_size=0.2,
-        random_state=42
-    )
+        X = df[["hour"]]
 
-    model = RandomForestClassifier()
+        y = df["motion"]
 
-    model.fit(X_train, y_train)
+        X_train, X_test, y_train, y_test = train_test_split(
+            X,
+            y,
+            test_size=0.2,
+            random_state=42
+        )
 
-    accuracy = model.score(X_test, y_test)
+        model = RandomForestClassifier()
 
-    joblib.dump(model, MODEL_PATH)
+        model.fit(X_train, y_train)
 
-    print(f"Model trained. Accuracy: {accuracy}")
+        accuracy = model.score(X_test, y_test)
+
+        joblib.dump(model, MODEL_PATH)
+
+        print(f"Model trained successfully")
+        print(f"Accuracy: {accuracy}")
+
+    except Exception as e:
+
+        print("Training error:", e)
 
     time.sleep(30)
