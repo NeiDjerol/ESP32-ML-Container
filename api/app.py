@@ -30,12 +30,15 @@ def receive_data(data: MotionData):
 
     df = pd.DataFrame([new_row])
 
-    file_exists = os.path.isfile(DATASET_PATH)
+    write_header = (
+        not os.path.exists(DATASET_PATH)
+        or os.path.getsize(DATASET_PATH) == 0
+    )
 
     df.to_csv(
         DATASET_PATH,
         mode='a',
-        header=not file_exists,
+        header=write_header,
         index=False
     )
 

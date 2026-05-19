@@ -5,13 +5,16 @@ import joblib
 import os
 import time
 
+print("TRAINER CONTAINER STARTED")
+
 DATASET_PATH = "dataset/motion_data.csv"
 MODEL_PATH = "model/traffic_model.pkl"
 
 print("ML trainer started")
 
 while True:
-
+    print("Trainer loop running")
+    
     try:
 
         if not os.path.exists(DATASET_PATH):
