@@ -1,0 +1,29 @@
+services:
+
+  api:
+    build: ./api
+    container_name: motion_api
+
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - ./dataset:/app/dataset
+
+  simulator:
+    build: ./simulator
+    container_name: motion_simulator
+
+    depends_on:
+      - api
+
+  trainer:
+    build: ./trainer
+    container_name: ml_trainer
+
+    volumes:
+      - ./dataset:/app/dataset
+      - ./model:/app/model
+
+    depends_on:
+      - api
