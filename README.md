@@ -189,7 +189,7 @@ Contains:
 
 ---
 
-# Docker запуск
+# Docker Launch
 
 ## Build and start containers
 
@@ -278,9 +278,3 @@ Possible future improvements:
 - MQTT support
 - Grafana visualization
 - TinyML deployment on ESP32
-
----
-
-# Author
-
-Educational IoT + ML project based on ESP32, Docker and Python.
